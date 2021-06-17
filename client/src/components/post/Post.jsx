@@ -128,7 +128,7 @@ export default function Post({ post }) {
                 src={
                   user.profilePicture
                     ? PublicImg + user.profilePicture
-                    : PublicImg + "img/defaultDP.svg"
+                    : PublicImg + "defaultDP.svg"
                 }
                 alt="profilePic"
                 className="profilePic post-profile"

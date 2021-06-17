@@ -1,37 +1,37 @@
 export const Users = [
   {
     id: 1,
-    profilePicture: "img/among-nature.svg",
+    profilePicture: "among-nature.svg",
     username: "Safak Kocaoglu",
   },
   {
     id: 2,
-    profilePicture: "img/bet.svg",
+    profilePicture: "bet.svg",
     username: "Janell Shrum",
   },
   {
     id: 3,
-    profilePicture: "img/buddy.svg",
+    profilePicture: "buddy.svg",
     username: "Alex Durden",
   },
   {
     id: 4,
-    profilePicture: "img/defaultDP.svg",
+    profilePicture: "defaultDP.svg",
     username: "Dora Hawks",
   },
   {
     id: 5,
-    profilePicture: "img/defaultBG.svg",
+    profilePicture: "defaultBG.svg",
     username: "Thomas Holden",
   },
   {
     id: 6,
-    profilePicture: "img/sad.svg",
+    profilePicture: "sad.svg",
     username: "Shirley Beauchamp",
   },
   {
     id: 7,
-    profilePicture: "img/sign-up.svg",
+    profilePicture: "sign-up.svg",
     username: "Travis Bennett",
   },
 ];
@@ -40,7 +40,7 @@ export const Posts = [
   {
     id: 1,
     desc: "Love For All, Hatred For None.",
-    img: ["img/well-done.svg", "img/home-v2.png", "img/welcome.svg"],
+    img: ["well-done.svg", "home-v2.png", "welcome.svg"],
     date: "5 mins ago",
     userId: 1,
     lits: [32],
@@ -50,7 +50,7 @@ export const Posts = [
   },
   {
     id: 2,
-    img: ["img/welcome.svg"],
+    img: ["welcome.svg"],
     date: "15 mins ago",
     userId: 2,
     lits: [2],
@@ -61,7 +61,7 @@ export const Posts = [
   {
     id: 3,
     desc: "Every moment is a fresh beginning.",
-    img: ["img/tier.svg"],
+    img: ["tier.svg"],
     date: "1 hour ago",
     userId: 3,
     lits: [61],
@@ -71,7 +71,7 @@ export const Posts = [
   },
   {
     id: 4,
-    img: ["img/step-to-sun.svg"],
+    img: ["step-to-sun.svg"],
     date: "4 hours ago",
     userId: 4,
     lits: [7],
@@ -81,7 +81,7 @@ export const Posts = [
   },
   {
     id: 5,
-    img: ["img/among-nature.svg"],
+    img: ["among-nature.svg"],
     date: "5 hours ago",
     userId: 5,
     lits: [23],
@@ -91,7 +91,7 @@ export const Posts = [
   },
   {
     id: 6,
-    img: ["img/punkt.png"],
+    img: ["punkt.png"],
     date: "1 day ago",
     userId: 6,
     lits: [44],
@@ -102,7 +102,7 @@ export const Posts = [
   {
     id: 7,
     desc: "Never regret anything that made you smile.",
-    img: ["img/home-v2.png"],
+    img: ["home-v2.png"],
     date: "2 days ago",
     userId: 7,
     lits: [52],

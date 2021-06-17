@@ -1,14 +1,30 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./progressTimeline.css";
-import { Users, Posts } from "../../dummyDate";
 import Post from "../post/Post";
 import ProgressPost from "../progressPost/ProgressPost";
+import axios from "axios";
+import { UserContext } from "../../context/UserContext";
 
-export default function ProgressTimeline() {
+export default function ProgressTimeline({ username }) {
+  const [posts, setPosts] = useState([]);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await axios.get("/post/profile/" + username);
+
+      setPosts(res.data);
+    };
+    fetchPosts();
+  }, [username]);
+
   return (
     <div className="progress-timeline">
       <h2>Progress</h2>
-      {Posts.map((p, index) => <ProgressPost key={p.id} pPost={p} />).reverse()}
+      {posts.map((p) => (
+        <ProgressPost key={p._id} pPost={p} />
+      ))}
+      {/* {posts.map((p, index) => <ProgressPost key={p.id} pPost={p} />).reverse()} */}
     </div>
   );
 }

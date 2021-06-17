@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import "./recordStatus.css";
 import { TextareaAutosize } from "@material-ui/core";
 import {
@@ -8,6 +8,7 @@ import {
   Room,
   EmojiEmotions,
   Cancel,
+  AllInboxSharp,
 } from "@material-ui/icons";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
@@ -16,31 +17,72 @@ export default function RecordStatus() {
   const { user } = useContext(UserContext);
   const desc = useRef("");
 
-  const [file, setFile] = useState(null);
+  const [files, setFiles] = useState([]);
   const [isDisabled, setDisabled] = useState(false);
   const [recordText, setRecordText] = useState("");
 
-  // function handleDisable() {
-
-  // }
-
-  function submitRecord(event) {
-    setDisabled(true);
-    setRecordText("");
+  async function submitRecord(event) {
+    // setDisabled(true);
+    // setRecordText("");
     event.preventDefault();
     const newPost = {
       userId: user._id,
       desc: desc.current.value,
+      goalId: 123,
+      img: [],
     };
 
+    if (files.length > 0) {
+      const data = new FormData();
+      let fileNames = [];
+
+      files.forEach((f) => {
+        // const fileExtension = (f.name.match(/\.+[\S]+$/) || [])[0];
+        // fileNames.push(`${Date.now()}${f.name}`);
+        fileNames.push(f.name);
+      });
+
+      files.forEach((f) => {
+        // const fileExtension = (f.name.match(/\.+[\S]+$/) || [])[0];
+        data.append("file", f);
+        // data.append("name", `${Date.now()}${f.name}`);
+        data.append("name", f.name);
+      });
+
+      // data.append("name", fileNames);
+      // data.append("file", files);
+      newPost.img = fileNames;
+      console.log(newPost);
+      try {
+        await axios.post("/upload", data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     try {
-      axios.post("/post", newPost);
-    } catch (err) {}
+      await axios.post("/post", newPost);
+    } catch (err) {
+      console.log(err);
+    }
+
+    setRecordText("");
+    setFiles([]);
   }
 
   function handleChange(event) {
     const { name, value } = event.target;
     setRecordText(value);
+  }
+
+  function handleUpload(event) {
+    console.log(event.target.files);
+    let fileList = [];
+    for (let i = 0; i < event.target.files.length; i++) {
+      fileList.push(event.target.files[i]);
+    }
+
+    setFiles(fileList);
   }
 
   return (
@@ -80,7 +122,8 @@ export default function RecordStatus() {
                 id="file"
                 accept=".png,.jpeg,.jpg"
                 disabled={isDisabled}
-                onChange={(e) => setFile(e.target.files)}
+                multiple
+                onChange={handleUpload}
               />
             </label>
             <button
