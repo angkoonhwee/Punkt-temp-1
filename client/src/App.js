@@ -35,6 +35,9 @@ function App() {
         <Route path="/progress" exact>
           <Progress />
         </Route>
+        <Route path="/progress/:username">
+          <Progress />
+        </Route>
       </Switch>
     </Router>
   );

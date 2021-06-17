@@ -13,7 +13,11 @@ export default function ProgressTimeline({ username }) {
     const fetchPosts = async () => {
       const res = await axios.get("/post/profile/" + username);
 
-      setPosts(res.data);
+      setPosts(
+        res.data.sort(
+          (p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt)
+        )
+      );
     };
     fetchPosts();
   }, [username]);

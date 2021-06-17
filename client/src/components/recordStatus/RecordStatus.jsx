@@ -12,6 +12,7 @@ import {
 } from "@material-ui/icons";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
+import ImgPreview from "./ImgPreview";
 
 export default function RecordStatus() {
   const { user } = useContext(UserContext);
@@ -31,6 +32,7 @@ export default function RecordStatus() {
       goalId: 123,
       img: [],
     };
+    console.log(files);
 
     if (files.length > 0) {
       const data = new FormData();
@@ -43,18 +45,15 @@ export default function RecordStatus() {
       });
 
       files.forEach((f) => {
-        // const fileExtension = (f.name.match(/\.+[\S]+$/) || [])[0];
         data.append("file", f);
-        // data.append("name", `${Date.now()}${f.name}`);
         data.append("name", f.name);
       });
 
-      // data.append("name", fileNames);
-      // data.append("file", files);
       newPost.img = fileNames;
-      console.log(newPost);
+      // console.log(newPost);
       try {
         await axios.post("/upload", data);
+        window.location.reload();
       } catch (err) {
         console.log(err);
       }
@@ -66,8 +65,8 @@ export default function RecordStatus() {
       console.log(err);
     }
 
-    setRecordText("");
-    setFiles([]);
+    // setRecordText("");
+    // setFiles([]);
   }
 
   function handleChange(event) {
@@ -85,6 +84,12 @@ export default function RecordStatus() {
     setFiles(fileList);
   }
 
+  function deleteImg(id) {
+    setFiles((prev) => {
+      return prev.filter((file, index) => index !== id);
+    });
+  }
+
   return (
     <div className="record-status">
       <form
@@ -98,7 +103,7 @@ export default function RecordStatus() {
             value={recordText}
             ref={desc}
             className="record-area"
-            placeholder="Have you completed your goals today? (You can only record once a day)"
+            placeholder="Have you completed your goals today? (You can only record once a day, with a max of 6 imgs / record)"
             disabled={isDisabled}
             onChange={handleChange}
             style={{ cursor: isDisabled ? "not-allowed" : "text" }}
@@ -137,6 +142,20 @@ export default function RecordStatus() {
               Record
             </button>
           </div>
+          {files.length !== 0 && (
+            <div className="record-preview">
+              {files.map((f, index) => {
+                return (
+                  <ImgPreview
+                    key={f.name}
+                    id={index}
+                    f={f}
+                    onDelete={deleteImg}
+                  />
+                );
+              })}
+            </div>
+          )}
         </div>
       </form>
     </div>
