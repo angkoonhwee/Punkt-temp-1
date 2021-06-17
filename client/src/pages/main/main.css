@@ -1,0 +1,67 @@
+.container-success {
+  /* position: relative; */
+  display: flex;
+  width: 100%;
+  background-color: rgba(239, 253, 255, 0.87);
+  min-height: 85vh;
+}
+
+@media (max-width: 750px) {
+  .container-success {
+    flex-direction: column-reverse;
+  }
+}
+
+/* .container-success h1 {
+  font-family: "Dosis", "Montserrat", sans-serif;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  font-size: 2.75rem;
+  color: #ffb819;
+}
+
+.container-success p {
+  color: #267b99;
+  margin-bottom: 3px;
+}
+
+.container-success img {
+  width: 450px;
+  padding-top: 3%;
+}
+
+#input-long {
+  max-width: 600px;
+}
+
+@media (max-width: 700px) {
+  .container-success {
+    padding: 12.5% 0;
+  }
+
+  .container-success h1 {
+    font-size: 2.15rem;
+    padding-top: 3%;
+  }
+
+  .container-success p {
+    font-size: 0.85rem;
+    padding: 0;
+  }
+
+  .container-success img {
+    width: 80%;
+    padding-top: 3%;
+  }
+
+  .container-success .bton {
+    width: 120px;
+    height: 42px;
+    background-color: #86ccda;
+    font-size: 0.85rem;
+  }
+
+  .alert-dismissible {
+    font-size: 0.8rem;
+  }
+} */

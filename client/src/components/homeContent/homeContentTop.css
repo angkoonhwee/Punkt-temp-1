@@ -1,0 +1,140 @@
+.container-bg-img {
+  /* background-image: url("/assets/img/home-v2.png");
+   */
+  background-image: url(./home-v2.png);
+  background-repeat: no-repeat;
+  background-position: bottom 20% right 5%;
+  background-size: cover;
+  min-height: 95vh;
+}
+
+.container.top {
+  border-radius: 25px;
+  position: relative;
+  top: 10%;
+  left: 5%;
+  width: 48%;
+  margin: 0;
+  padding: 7% 0 2% 15%;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.container.top form {
+  align-items: flex-start;
+  padding-left: 0;
+}
+
+.container.top h1 {
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: #16697a;
+  font-family: "Dosis", "Mulish", sans-serif;
+}
+
+.container.top p {
+  margin-bottom: 5px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+#home-signup {
+  background-color: #ffb819;
+  color: white;
+  border-radius: 15px;
+  margin: 0;
+  margin-top: 5px;
+  width: 150px;
+  height: 55px;
+  font-size: 1.25rem;
+  border: none;
+}
+
+#home-signup:hover {
+  background-color: #f5b21d;
+}
+
+/* .container.top h1 {
+  padding: 7% 5%;
+
+} */
+@media (max-width: 1100px) {
+  .container-bg-img {
+    background-image: url(./home-phone.png);
+    min-height: 85vh;
+  }
+
+  .container.top {
+    width: 55%;
+    top: 12%;
+    left: 7.5%;
+    padding: 7% 0 2% 15%;
+  }
+
+  .container.top h1 {
+    font-size: 3rem;
+  }
+
+  .container.top p {
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 620px) {
+  .container-bg-img {
+    min-height: 75vh;
+  }
+
+  .container.top {
+    background-color: #ffffff70;
+    position: relative;
+    top: 50px;
+    width: 60%;
+    padding: 4% 7.5%;
+    text-align: center;
+  }
+
+  .container.top form {
+    align-items: center;
+    padding: 0 0.5rem;
+  }
+
+  .container.top h1 {
+    font-size: 2.25rem;
+  }
+
+  #home-signup {
+    width: 120px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .container-bg-img {
+    min-height: 60vh;
+    background-position: bottom 5% right 15%;
+  }
+
+  .container.top {
+    width: 65%;
+    padding: 4% 5%;
+    text-align: center;
+    top: 25px;
+  }
+
+  .container.top form {
+    align-items: center;
+    padding: 0 0.5rem;
+  }
+
+  .container.top h1 {
+    font-size: 1.75rem;
+  }
+
+  .container.top p {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+}

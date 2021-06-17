@@ -1,0 +1,203 @@
+hr {
+  border-style: none;
+  border-top-style: dotted;
+  border-color: #489fb5;
+  background-color: #fff;
+  border-width: 5px;
+  width: 7.5%;
+  margin: 2% 47.5%;
+}
+
+.container-middle {
+  padding: 7% 15%;
+  margin: 0;
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+
+.feature img {
+  width: 100%;
+  padding: 10%;
+}
+
+.feature-desc {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.feature-desc h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-family: "Dosis", "Mulish", sans-serif;
+  color: #3f3d56;
+}
+
+.feature-desc p {
+  font-size: 20px;
+  line-height: 1.75;
+}
+
+@media (max-width: 1100px) {
+  .feature-desc h2 {
+    font-size: 2.25rem;
+  }
+
+  .feature-desc p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 620px) {
+  .feature-desc h2 {
+    font-size: 1.75rem;
+    letter-spacing: 0;
+  }
+
+  .feature-desc p {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 520px) {
+  .feature {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-desc {
+    padding-top: 10%;
+  }
+
+  .feature.reverse {
+    flex-direction: column-reverse;
+  }
+
+  .feature-desc h2 {
+    font-size: 1.5rem;
+  }
+
+  .feature-desc p {
+    font-size: 14px;
+    line-height: 1.25;
+    margin-bottom: 7px;
+  }
+
+  .container-middle {
+    padding: 3.5% 10%;
+    margin: 0;
+  }
+}
+
+.container-bottom-bg {
+  background-image: url(./sign-up.svg);
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  min-height: 75vh;
+}
+
+.container.bottom {
+  background-color: #ffffff70;
+  border-radius: 50px;
+  position: relative;
+  top: 45px;
+  width: 80%;
+  padding: 3% 10%;
+  text-align: center;
+}
+
+.container.bottom h1 {
+  font-size: 4.25rem;
+  font-weight: 900;
+  color: #ffa62b;
+  font-family: "Dosis", "Mulish", sans-serif;
+}
+
+.container.bottom p {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  padding: 0 15%;
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .container-bottom-bg {
+    min-height: 62vh;
+    background-size: cover;
+  }
+
+  .container.bottom {
+    width: 75%;
+    top: 50px;
+  }
+
+  .container.bottom h1 {
+    font-size: 2.5rem;
+  }
+
+  .container.bottom p {
+    font-size: 18px;
+    margin-bottom: 5px;
+    line-height: 1.5;
+    padding: 0 9%;
+  }
+}
+
+@media (max-width: 700px) {
+  .container-bottom-bg {
+    min-height: 62vh;
+    background-size: cover;
+  }
+
+  .container.bottom {
+    top: 50px;
+    padding: 3% 5%;
+  }
+
+  .container.bottom h1 {
+    font-size: 2.25rem;
+  }
+
+  .container.bottom p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .container-bottom-bg {
+    min-height: 60vh;
+    background-size: cover;
+  }
+
+  .container.bottom h1 {
+    font-size: 1.75rem;
+  }
+
+  .container.bottom p {
+    font-size: 13px;
+    line-height: 1.25;
+    padding: 0 5%;
+  }
+
+  #home-signup {
+    width: 120px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .pw-requirements p {
+    margin-bottom: 2px;
+    font-size: 0.6rem;
+  }
+}
+
+.alert-dismissible {
+  text-align: left;
+}

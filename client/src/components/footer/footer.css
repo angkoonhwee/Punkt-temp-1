@@ -1,0 +1,29 @@
+.container-fluid.foot {
+  background-color: #267b99;
+  color: white;
+  text-align-last: center;
+  padding: 10px 0;
+  position: absolute;
+}
+
+.footer-contact {
+  text-decoration: none;
+  color: white;
+}
+
+.footer-contact:hover {
+  color: #86ccda;
+}
+
+.foot p {
+  margin: 0;
+  text-align: center;
+  padding: 5px 0;
+  line-height: 1;
+}
+
+@media (max-width: 520px) {
+  footer {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,175 @@
+.container-fluid {
+  position: fixed;
+  z-index: 99;
+  background-color: #b5dfe7;
+  color: #16697a;
+  padding: 0 10%;
+  -webkit-box-shadow: 0px 0px 12px -2px rgba(22, 105, 122, 0.54);
+  box-shadow: 0px 0px 12px -2px rgba(22, 105, 122, 0.54);
+}
+
+.navbar {
+  padding: 2px 0;
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 2.15rem;
+  color: #16697a !important;
+  line-height: 1;
+  /* margin-right: 10px; */
+}
+
+#punkt {
+  font-family: "Barriecito", "Montserrat", sans-serif;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.punkt-img {
+  width: 45px;
+  /* padding: 1.5px 0; */
+  padding-right: 5px;
+}
+
+.navbar-light .navbar-toggler {
+  color: #16697a94;
+  border-color: #16697ae0;
+  cursor: pointer;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  font-family: "Mulish", sans-serif;
+  font-weight: 500;
+  font-size: 1.2rem;
+  height: 38px;
+  cursor: pointer;
+  margin: 7.5px;
+  color: rgb(22 120 140);
+  padding-right: 8px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.navbar-light .navbar-nav .nav-link.navbar-link-item {
+  width: 38px;
+  border-radius: 50%;
+  /* margin: 7.5px 0; */
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: rgb(16 81 95);
+  background-color: rgba(240, 252, 255, 0.699);
+}
+
+.searchBar {
+  background-color: rgba(240, 252, 255, 0.699);
+}
+
+.searchInput {
+  border: none;
+  background-color: transparent;
+  color: #16697a;
+  width: 80%;
+}
+
+.searchInput:focus {
+  outline: none;
+  color: rgb(16 81 95);
+}
+
+.searchInput::placeholder {
+  color: #16697a;
+}
+
+.searchIcon {
+  margin: auto 8px;
+}
+
+.navbar-icon {
+  vertical-align: top;
+  align-self: center;
+  margin: 0;
+}
+
+.navbar-icon-badge {
+  width: 10px;
+  height: 10px;
+  background-color: #fdbf39;
+  border-radius: 50%;
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  z-index: 1;
+}
+
+.nav-item {
+  margin-right: 10%;
+  display: contents;
+}
+
+.nav-name {
+  margin: 0;
+  display: none;
+}
+
+.profilePic {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  margin-right: 8px;
+  background-color: rgba(240, 252, 255, 0.699);
+}
+
+#profileDiv:hover {
+  background-color: transparent;
+}
+
+@media (max-width: 992px) {
+  .nav-name {
+    display: flex;
+  }
+
+  .navbar-brand {
+    margin-left: 10px;
+  }
+
+  .navbar-toggler {
+    margin-right: 10px;
+  }
+
+  .navbar-light .navbar-nav .nav-link {
+    margin: 5px 7.5px;
+    font-weight: 400;
+    font-size: 15px;
+    justify-content: flex-start;
+  }
+
+  .navbar-light .navbar-nav .nav-link.navbar-link-item {
+    width: auto;
+    height: 38px;
+    border-radius: 15px;
+  }
+
+  .navbar-icon {
+    margin: 7.5px;
+  }
+
+  .profilePic {
+    width: 32px;
+    height: 32px;
+  }
+
+  #profileDiv:hover {
+    background-color: rgba(240, 252, 255, 0.699);
+  }
+}

@@ -1,0 +1,364 @@
+.post {
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  margin: 5% 5% 5% 15%;
+  background-color: white;
+}
+
+.post-wrapper {
+  padding: 10px;
+}
+
+.post-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.profilePic.post-profile {
+  width: 45px;
+  height: 45px;
+  margin-right: 16px;
+}
+
+.post-top-left {
+  /* padding: 10px; */
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.profile-name-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2px 0;
+}
+
+.post-date {
+  font-size: 12.5px;
+  color: grey;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.post-name {
+  font-size: 18px;
+  color: #16697a;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 1.25;
+}
+
+.post-middle {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-start;
+}
+
+.post-imgs {
+  display: flex;
+  overflow-x: scroll;
+}
+
+#post-imgs img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  /* padding: 0 10px; */
+}
+
+#post-imgs button:hover {
+  background-color: rgba(236, 236, 236, 0.555);
+}
+
+.post-bottom-left {
+  padding: 5px 20px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.post-bottom-left p {
+  margin-bottom: 0;
+  margin-right: 10px;
+  font-size: 14px;
+  color: grey;
+}
+
+.post-bottom-left button {
+  width: 45px;
+  height: 45px;
+  margin: 10px;
+  cursor: pointer;
+  /* background-color: #95c9d4b0; */
+  color: white;
+  -webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+
+#fire-icon {
+  cursor: pointer;
+}
+
+#comment-icon {
+  cursor: pointer;
+}
+
+#fire-icon:hover {
+  background-color: rgb(255 101 132);
+}
+
+#comment-icon:hover {
+  background-color: #daa078fa !important;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  width: 7.5%;
+}
+
+.post-comment {
+  padding: 0 20px;
+}
+
+.comment-form {
+  padding: 0;
+}
+
+.comment-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.comment-container textarea {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #f1f1f1d2;
+  border: none;
+  height: auto;
+  padding: 5px 10px;
+  margin-right: 7.5px;
+}
+
+.comment-container textarea:focus {
+  outline: none;
+}
+
+.comment-container button {
+  background-color: #daa078fa;
+  border: none;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  max-width: 110px;
+  border-radius: 10px;
+}
+
+.comment-container button:hover {
+  background-color: #be7f51fa;
+}
+
+.post-goal-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 20px 0;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #d8edf191;
+  color: rgb(91, 111, 121);
+  cursor: pointer;
+}
+
+.post-goal-section p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.post-goal-content {
+  display: flex;
+  width: 73%;
+}
+
+.goal-bet-amount {
+  display: flex;
+  width: 23.5%;
+}
+
+.post-user-comments {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 7px 5px;
+  background-color: #f1f1f1d2;
+  margin: 0 0 7px;
+  border-radius: 10px;
+}
+
+.comment-content p {
+  margin-bottom: 0;
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+.fa-laugh-wink,
+.fa-meh {
+  font-size: 25px;
+}
+
+.post-bottom-left-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+  margin: 0 5px;
+}
+
+@media (max-width: 950px) {
+  .post-bottom-left-btn {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 770px) {
+  .post {
+    margin: 5% 10%;
+    /* margin-right: 5%; */
+  }
+
+  .post-date {
+    font-size: 10px;
+  }
+
+  .post-name {
+    font-size: 14px;
+    line-height: 1.15;
+  }
+
+  .post-top {
+    padding: 10px;
+  }
+
+  .post-top-right svg {
+    margin: 0;
+  }
+
+  .post-middle {
+    padding: 0 10px;
+  }
+
+  .post-middle p {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+
+  .post-bottom-left p {
+    font-size: 11px;
+  }
+
+  .post-bottom-left {
+    padding: 5px;
+  }
+
+  .post-bottom-left button {
+    width: 33px !important;
+    height: 33px !important;
+    margin: 5px;
+  }
+
+  .post-bottom-left svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #post-imgs img {
+    height: 285px;
+  }
+
+  .post-goal-section {
+    margin: 5px 10px 0;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .post-goal-section p {
+    margin-bottom: 0;
+    font-size: 12px;
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+
+  .post-goal-content {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .goal-bet-amount {
+    width: 100%;
+  }
+
+  .comment-content p {
+    line-height: 1.25;
+    font-size: 12.5px;
+  }
+
+  .post-comment {
+    padding: 0 10px;
+  }
+
+  .comment-container {
+    font-size: 12.5px;
+    line-height: 1.4;
+  }
+
+  .comment-container textarea {
+    height: 45px !important;
+    padding: 5px 10px;
+  }
+
+  .comment-container button {
+    font-size: 12.5px;
+    line-height: 1.4;
+    max-width: 70px;
+  }
+
+  .post-bottom-left-btn {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 430px) {
+  #post-imgs img {
+    height: 210px;
+  }
+
+  .post-bottom-left button {
+    height: 16px !important;
+    margin-right: 5px;
+    margin-left: 2px;
+  }
+
+  .post-bottom-left svg {
+    width: 15px !important;
+  }
+
+  .post-bottom-left p {
+    font-size: 10px;
+    line-height: 1.2;
+    margin-right: 2.5px;
+  }
+
+  .post-bottom-left-btn {
+    flex-direction: column;
+  }
+}

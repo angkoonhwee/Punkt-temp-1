@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+input,
+button {
+  font-family: "Mulish", sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 2;
+}
+
+::selection {
+  background: #a0dfebbb;
+  color: #16697a;
+}

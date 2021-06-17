@@ -1,0 +1,17 @@
+.progress-timeline {
+  border-radius: 10px;
+  margin: 3.5% 10%;
+  margin-top: 0;
+  padding: 10px 0;
+}
+
+.progress-timeline h2 {
+  font-weight: 700;
+  color: #267b99;
+}
+
+@media (max-width: 770px) {
+  .progress-timeline h2 {
+    font-size: 22px;
+  }
+}

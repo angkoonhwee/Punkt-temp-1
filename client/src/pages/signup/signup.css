@@ -1,0 +1,7 @@
+.container-main {
+  position: relative;
+  width: 100%;
+  background-color: white;
+  min-height: 125vh;
+  overflow: hidden;
+}

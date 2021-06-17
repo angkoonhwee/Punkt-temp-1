@@ -1,0 +1,305 @@
+.post-note-todo {
+  /* border-radius: 10px; */
+  /* border: 2px solid #2d8091; */
+  margin-top: 12.5%;
+  padding: 5% 7.5%;
+  background-color: #f8e2d3cc;
+  -webkit-box-shadow: 5px 5px 16px -6px rgba(14, 30, 33, 0.74);
+  box-shadow: 5px 5px 16px -6px rgba(14, 30, 33, 0.74);
+}
+
+.post-note-todo h3 {
+  font-family: "Sigmar One", cursive;
+  /* letter-spacing: 2px; */
+  text-align: center;
+  /* margin-bottom: 10px; */
+  color: #dda176f1;
+  text-shadow: 0.5px 0.5px 0.5px #666;
+  font-size: 1.8rem;
+}
+
+/* .post-note-todo p {
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: #166e7e;
+  font-size: 18px;
+} */
+
+.chat-btn-container {
+  align-items: center;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+}
+
+.note-chat {
+  max-width: 250px;
+  width: 100%;
+  min-height: 40px;
+  height: auto;
+
+  border-radius: 10px;
+  /* border: 0.5px solid #2d8091; */
+  overflow: auto;
+  border: none;
+  background-color: #daa078fa;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  -webkit-box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.59);
+  box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.59);
+}
+
+.note-chat:hover {
+  background-color: #be7f51fa;
+}
+
+.fa-laugh-squint {
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+/* .bet-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+/* input[type="checkbox"] {
+  margin: 10px 15px;
+} */
+
+form.delete-todo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s 0.7s;
+  overflow: hidden;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  align-items: baseline;
+}
+
+/****** custom checkbox ********/
+.checkbox-container {
+  /* float: left; */
+  min-height: 50px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* padding: 40px 0px; */
+}
+
+.input-title {
+  clear: both;
+  padding: 0;
+  font-size: 18px;
+  color: #b17043;
+  font-weight: 400;
+}
+
+/* Styling Checkbox Starts */
+.checkbox-label {
+  display: block;
+  position: relative;
+  /* margin: auto; */
+  margin: 10px 15px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1.5;
+  height: 20px;
+  width: 20px;
+  clear: both;
+}
+
+.checkbox-label input {
+  position: absolute;
+  opacity: 0; /* hide default checkbox */
+  cursor: pointer;
+}
+
+.checkbox-label .checkbox-custom {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border-radius: 5px;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  border: 1px solid #b17043;
+}
+
+.checkbox-container:hover input ~ .checkbox-custom {
+  background-color: #fad7bfda;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom {
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-transform: rotate(0deg) scale(1);
+  -ms-transform: rotate(0deg) scale(1);
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  border: 2px solid #ffffff;
+}
+
+.todo-done {
+  text-decoration: line-through 2px;
+  text-decoration-color: white;
+}
+
+.checkbox-label .checkbox-custom::after {
+  position: absolute;
+  content: "";
+  left: 12px;
+  top: 12px;
+  height: 0px;
+  width: 0px;
+  border-radius: 5px;
+  border: 1px solid #b17043;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(0deg) scale(0);
+  -ms-transform: rotate(0deg) scale(0);
+  transform: rotate(0deg) scale(0);
+  opacity: 1;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::after {
+  -webkit-transform: rotate(45deg) scale(1);
+  -ms-transform: rotate(45deg) scale(1);
+  transform: rotate(45deg) scale(1);
+  opacity: 1;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 12px;
+  border: solid #b17043;
+  border-width: 0 2px 2px 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* For Ripple Effect */
+.checkbox-label .checkbox-custom::before {
+  position: absolute;
+  content: "";
+  left: 10px;
+  top: 10px;
+  width: 0px;
+  height: 0px;
+  border-radius: 5px;
+  border: 2px solid #b17043;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+}
+
+.checkbox-label input:checked ~ .checkbox-custom::before {
+  left: -3px;
+  top: -3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  -webkit-transform: scale(3);
+  -ms-transform: scale(3);
+  transform: scale(3);
+  opacity: 0;
+  z-index: 2;
+  transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+}
+
+.progress.buddy {
+  width: 100%;
+  margin: 5px 15px;
+  margin-bottom: 0;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.progress-bar.buddy {
+  background-color: #be7f51fa;
+}
+
+.buddy-days {
+  font-size: 12px;
+  margin: 0;
+  text-align: right;
+  margin-right: 15px;
+  color: #af8a6f;
+}
+
+.todayDate {
+  text-align: left;
+  margin: 0 15px;
+  color: #b17043;
+}
+
+@media (max-width: 770px) {
+  .post-note-todo h3 {
+    font-size: 1.35rem;
+  }
+
+  .fa-laugh-squint {
+    margin-right: 5px;
+    font-size: 16px;
+  }
+
+  .input-title {
+    font-size: 14px;
+  }
+
+  /* Styling Checkbox Starts */
+  .checkbox-label {
+    margin: 0 15px;
+    font-size: 14px;
+    line-height: 1.2;
+    height: 18px;
+    width: 18px;
+  }
+
+  .checkbox-label .checkbox-custom {
+    height: 18px;
+    width: 18px;
+  }
+
+  .checkbox-container {
+    min-height: 35px;
+  }
+
+  .buddy-days {
+    font-size: 10px;
+  }
+
+  .todayDate {
+    font-size: 14px;
+  }
+
+  .progress.buddy {
+    height: 18px;
+  }
+
+  .note-chat {
+    font-size: 14px;
+    margin: 2.5px 5px;
+    line-height: 1.4;
+    padding: 5px;
+  }
+}

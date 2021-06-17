@@ -1,0 +1,107 @@
+.report {
+  position: relative;
+}
+
+.report-wrapper {
+  border: 1.5px solid #daa078fa;
+  border-radius: 10px;
+  background-color: white;
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 0px 12px -8px rgba(0, 0, 0, 0.68);
+  box-shadow: 0px 0px 12px -8px rgba(0, 0, 0, 0.68);
+}
+
+.report-wrapper h4 {
+  color: #b17043;
+  margin: 5px;
+  font-weight: 800;
+}
+
+.report-wrapper strong {
+  color: rgb(124, 124, 124);
+}
+
+.report-wrapper form {
+  padding: 0 10px;
+}
+
+.report-icon {
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  margin-right: 10px;
+  color: grey;
+}
+
+.report-icon:hover {
+  color: #be7f51fa;
+}
+
+.reason-area {
+  width: 220px;
+  border-radius: 10px;
+  background-color: #f1f1f1d2;
+  border: none;
+  height: auto;
+  padding: 5px 10px;
+  margin-right: 7.5px;
+}
+
+.reason-area:focus {
+  outline: none;
+}
+
+.report-wrapper button {
+  color: white;
+  background-color: #daa078fa;
+  padding: 3px 12.5px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 7px;
+  font-weight: 600;
+}
+
+.report-wrapper button:hover {
+  color: white;
+  background-color: #be7f51fa;
+  padding: 3px 12.5px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 7px;
+  font-weight: 600;
+}
+
+@media (max-width: 770px) {
+  .report-wrapper {
+    border: 1.5px solid #daa078fa;
+    border-radius: 10px;
+    background-color: white;
+    position: absolute;
+    z-index: 2;
+    right: 10px;
+    padding: 7.5px;
+  }
+
+  .report-wrapper h4 {
+    font-size: 18px;
+  }
+
+  .report-wrapper strong {
+    font-size: 14px;
+  }
+
+  .reason-area {
+    font-size: 14px;
+    padding: 3.5px 10px;
+    width: 160px;
+    line-height: 1.5;
+  }
+
+  .report-wrapper button {
+    padding: 3px 12.5px;
+    font-size: 14px;
+  }
+}
