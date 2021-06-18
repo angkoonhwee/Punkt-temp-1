@@ -19,34 +19,34 @@ import { UserContext } from "../../context/UserContext";
 
 /* *********************************************************************** */
 
-export default function Post({ post }) {
+export default function Post({ post, onDelete}) {
   const currDays = 10;
   const totalDays = 30;
 
-  const months = {
-    0: "January",
-    1: "February",
-    2: "March",
-    3: "April",
-    4: "May",
-    5: "June",
-    6: "July",
-    7: "August",
-    8: "September",
-    9: "October",
-    10: "November",
-    11: "December",
-  };
-  const date = new Date();
-  const day = date.getDay();
-  const mth = months[date.getMonth()];
-  const yr = date.getFullYear();
-  const hr = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-  const min =
-    date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-  // const time = moment(date.toLocaleTimeString(), "hh:mm A").format("HH:mm");
+  // const months = {
+  //   0: "January",
+  //   1: "February",
+  //   2: "March",
+  //   3: "April",
+  //   4: "May",
+  //   5: "June",
+  //   6: "July",
+  //   7: "August",
+  //   8: "September",
+  //   9: "October",
+  //   10: "November",
+  //   11: "December",
+  // };
+  // const date = new Date();
+  // const day = date.getDay();
+  // const mth = months[date.getMonth()];
+  // const yr = date.getFullYear();
+  // const hr = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+  // const min =
+  //   date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+  // // const time = moment(date.toLocaleTimeString(), "hh:mm A").format("HH:mm");
 
-  const formattedDate = date.toLocaleTimeString() + `,  ${day} ${mth} ${yr}`;
+  // const formattedDate = date.toLocaleTimeString() + `,  ${day} ${mth} ${yr}`;
   const PublicImg = process.env.REACT_APP_PUBLIC_URL;
   const [isLit, setIsLit] = useState(false);
   const [numLit, setNumLit] = useState(post.lits.length);
@@ -55,7 +55,6 @@ export default function Post({ post }) {
   const [comment, setComment] = useState("");
   const [isBetFor, setBetFor] = useState(false);
   const [isBetAgainst, setBetAgainst] = useState(false);
-  const [isOwn, setOwn] = useState(false);
   const [user, setUser] = useState({});
   const { user: currUser } = useContext(UserContext);
 
@@ -104,10 +103,6 @@ export default function Post({ post }) {
     setComment(value);
   }
 
-  function deletePost() {
-    console.log("Post deleted");
-  }
-
   // function handleKeyPress(event) {
   //   console.log("onsubmit" + onsubmit);
   //   if (event.key === "Enter" && !event.shiftKey) {
@@ -144,9 +139,9 @@ export default function Post({ post }) {
           </div>
 
           <div className="post-top-right">
-            {isOwn ? (
+            {currUser._id === post.userId ? (
               <DeleteIcon
-                onClick={deletePost}
+                onClick={() => onDelete(post._id)}
                 style={{ cursor: "pointer", color: "#16697a" }}
               />
             ) : (

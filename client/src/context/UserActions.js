@@ -11,3 +11,8 @@ export const LoginFailure = (error) => ({
   type: "LOGIN_FAILURE",
   payload: error,
 });
+
+export const GoogleLogin = (user) => ({
+  type: "GOOGLE_LOGIN",
+  payload: user,
+});

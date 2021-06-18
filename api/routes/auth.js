@@ -87,23 +87,6 @@ router.post("/signup", async (req, res) => {
   //   password: req.body.password,
   // });
 
-  if (
-    !req.body.username ||
-    !req.body.email ||
-    !req.body.password ||
-    !req.body.password2
-  ) {
-    errors.push({
-      msg: "Please fill in all fields.",
-    });
-  }
-
-  if (req.body.password !== req.body.password2) {
-    errors.push({
-      msg: "Passwords do not match.",
-    });
-  }
-
   if (!schema.validate(req.body.password)) {
     // password do not match requirements
     errors.push({

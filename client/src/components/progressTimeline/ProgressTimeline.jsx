@@ -22,11 +22,22 @@ export default function ProgressTimeline({ username }) {
     fetchPosts();
   }, [username]);
 
+  async function deletePost(postId) {
+    try {
+      console.log("postID: " + postId);
+      console.log("userID: " + user._id);
+      await axios.delete("/post/" + postId, { userId: user._id });
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="progress-timeline">
       <h2>Progress</h2>
       {posts.map((p) => (
-        <ProgressPost key={p._id} pPost={p} />
+        <ProgressPost key={p._id} pPost={p} onDelete={deletePost} />
       ))}
       {/* {posts.map((p, index) => <ProgressPost key={p.id} pPost={p} />).reverse()} */}
     </div>

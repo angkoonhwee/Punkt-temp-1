@@ -3,7 +3,7 @@ import "./progressPost.css";
 import { Users, Posts } from "../../dummyDate";
 import Post from "../post/Post";
 
-export default function ProgressPost({ pPost }) {
+export default function ProgressPost({ pPost, onDelete }) {
   const startDate = new Date(2021, 4, 30);
   const currDate = pPost.createdAt;
   // console.log(currDate.substring(0, 4));
@@ -29,7 +29,7 @@ export default function ProgressPost({ pPost }) {
         startDate,
         currDate
       )}`}</div>
-      <Post post={pPost} />
+      <Post post={pPost} onDelete={onDelete} />
     </div>
   );
 }

@@ -11,6 +11,8 @@ import Signup from "./pages/signup/Signup";
 import Progress from "./pages/progress/Progress";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
+import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -21,10 +23,12 @@ function App() {
           {user ? <Redirect to="/main" /> : <Home />}
         </Route>
         <Route path="/login" exact>
-          {user ? <Redirect to="/main" /> : <Login />}
+          {/* {user ? <Redirect to="/main" /> : <Login />} */}
+          <Login />
         </Route>
         <Route path="/signup" exact>
-          {user ? <Redirect to="/main" /> : <Signup />}
+          {/* {user ? <Redirect to="/main" /> : <Signup />} */}
+          <Signup />
         </Route>
         <Route path="/main" exact>
           <Main />
@@ -37,6 +41,12 @@ function App() {
         </Route>
         <Route path="/progress/:username">
           <Progress />
+        </Route>
+        <Route path="/forgot-password">
+          <ForgotPassword />
+        </Route>
+        <Route path="/reset-password">
+          <ResetPassword />
         </Route>
       </Switch>
     </Router>

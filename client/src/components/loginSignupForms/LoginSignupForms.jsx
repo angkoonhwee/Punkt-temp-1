@@ -5,6 +5,7 @@ import { loginCall } from "../../apiCalls";
 import { UserContext } from "../../context/UserContext";
 import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
+import { GoogleLogin } from "react-google-login";
 
 function LoginSignupForms() {
   // const [loginInfo, setLoginInfo] = useState({
@@ -29,6 +30,9 @@ function LoginSignupForms() {
   const signupEmail = useRef();
   const signupPassword = useRef();
   const signupPassword2 = useRef();
+
+  const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  // console.log(googleClientID);
 
   // function handleLoginChange(event) {
   //   const { name, value } = event.target;
@@ -70,6 +74,11 @@ function LoginSignupForms() {
     );
   }
 
+  function checkPassword(input) {
+    var passwordReq = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    return input.match(passwordReq);
+  }
+
   const submitSignup = async (event) => {
     // setSignupInfo({
     //   username: "",
@@ -79,7 +88,11 @@ function LoginSignupForms() {
     // });
 
     event.preventDefault();
-    if (signupPassword.current.value !== signupPassword2.current.value) {
+    if (!checkPassword(signupPassword.current.value)) {
+      signupPassword.current.setCustomValidity(
+        "Password must be at least 6 characters with at least 1 UPPER case, 1 lower case and 1 numeric digit."
+      );
+    } else if (signupPassword.current.value !== signupPassword2.current.value) {
       signupPassword.current.setCustomValidity("Passwords do not match.");
     } else {
       const user = {
@@ -104,6 +117,33 @@ function LoginSignupForms() {
     }
   };
 
+  // async function googleLogin() {
+  //   try {
+  //     await axios.post("auth/google");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+
+  const googleSuccess = async (res) => {
+    console.log(res);
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    // try {
+    //   dispatch({ type: AUTH, data: { result, token } });
+
+    //   history.push("/");
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+
+  const googleError = (err) => {
+    console.log(err);
+    console.log("Google Sign In was unsuccessful. Try again later");
+  };
+
   return (
     <div className="container-forms">
       <div className="signup-login">
@@ -115,9 +155,23 @@ function LoginSignupForms() {
         >
           <h2 className="form-title">Login to Punkt.</h2>
           <div className="google-login">
-            <Link to="/auth/google" className="google-icon">
-              <i className="fab fa-google"></i> Login with Google
-            </Link>
+            <GoogleLogin
+              clientId={googleClientID}
+              render={(renderProps) => (
+                <button
+                  className="google-icon"
+                  onClick={renderProps.onClick}
+                  disabled={renderProps.disabled}
+                  // startIcon={<Icon />}
+                  variant="contained"
+                >
+                  <i className="fab fa-google"></i> Login with Google
+                </button>
+              )}
+              onSuccess={googleSuccess}
+              onFailure={googleError}
+              cookiePolicy="single_host_origin"
+            />
           </div>
           <p className="gmail-text">Or use your email account</p>
           <div className="input-field">
