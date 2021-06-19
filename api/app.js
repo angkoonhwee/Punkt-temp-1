@@ -13,12 +13,15 @@ const formidableMiddleware = require("express-formidable");
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
+const goalRoute = require("./routes/goal");
+const cors = require("cors");
 
 const app = express();
 
 mongoose.connect("mongodb://localhost:27017/testDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 mongoose.set("useCreateIndex", true);
@@ -51,6 +54,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(
+  cors({
+    origin: "http://localhost:3000", // allow to server to accept request from different origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true, // allow session cookie from browser to pass through
+  })
+);
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
@@ -81,6 +92,7 @@ app.post("/upload", upload.array("file", 6), (req, res) => {
 app.use("/user", userRoute);
 app.use("/auth", authRoute);
 app.use("/post", postRoute);
+app.use("/goal", goalRoute);
 
 app.listen(8000, function () {
   console.log("Server started on port 8000");

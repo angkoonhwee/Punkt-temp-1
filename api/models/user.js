@@ -81,6 +81,7 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    goalId: String,
     goalHistory: {
       type: Array,
       default: [],

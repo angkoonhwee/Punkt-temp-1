@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
 import UserReducer from "./UserReducer";
 
 const INITIAL_STATE = {
@@ -16,6 +16,7 @@ const INITIAL_STATE = {
     betFor: [],
     betAgainst: [],
     buddyHistory: [],
+    goalId: "60ce0baf165cd9d1e0b33a07",
     goalHistory: [],
     isAdmin: false,
     email: "john@gmail.com",
@@ -26,6 +27,7 @@ const INITIAL_STATE = {
     updatedAt: new Date(2021, 5, 14),
     __v: 0,
   },
+  // user: JSON.parse(localStorage.getItem("user")) || null,
   isFetching: false,
   error: false,
 };
@@ -34,6 +36,10 @@ export const UserContext = createContext(INITIAL_STATE);
 
 export const UserContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(state.user));
+  }, [state.user]);
 
   return (
     <UserContext.Provider

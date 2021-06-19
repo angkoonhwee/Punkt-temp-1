@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import "./loginSignup.css";
 import { Link, useHistory } from "react-router-dom";
 import { loginCall } from "../../apiCalls";
@@ -31,7 +31,6 @@ function LoginSignupForms() {
   const signupPassword = useRef();
   const signupPassword2 = useRef();
 
-  const googleClientID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   // console.log(googleClientID);
 
   // function handleLoginChange(event) {
@@ -117,32 +116,23 @@ function LoginSignupForms() {
     }
   };
 
-  // async function googleLogin() {
-  //   try {
-  //     await axios.post("auth/google");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+  function googleLogin() {
+    window.open(`http://localhost:8000/auth/google`, "_self");
+  }
 
-  const googleSuccess = async (res) => {
-    console.log(res);
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+  // useEffect(() => {
+  //   (async () => {
+  //     const request = await axios.get("auth/login/success");
 
-    // try {
-    //   dispatch({ type: AUTH, data: { result, token } });
-
-    //   history.push("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
-  };
-
-  const googleError = (err) => {
-    console.log(err);
-    console.log("Google Sign In was unsuccessful. Try again later");
-  };
+  //     const res = await request.json();
+  //     console.log(res);
+  //     //In my case I stored user object in redux store
+  //     if (request.status === 200) {
+  //       //Set User in Store
+  //       console.log("successfully logged in");
+  //     }
+  //   })();
+  // });
 
   return (
     <div className="container-forms">
@@ -155,23 +145,9 @@ function LoginSignupForms() {
         >
           <h2 className="form-title">Login to Punkt.</h2>
           <div className="google-login">
-            <GoogleLogin
-              clientId={googleClientID}
-              render={(renderProps) => (
-                <button
-                  className="google-icon"
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  // startIcon={<Icon />}
-                  variant="contained"
-                >
-                  <i className="fab fa-google"></i> Login with Google
-                </button>
-              )}
-              onSuccess={googleSuccess}
-              onFailure={googleError}
-              cookiePolicy="single_host_origin"
-            />
+            <button className="google-icon" onClick={googleLogin}>
+              <i className="fab fa-google"></i> Login with Google
+            </button>
           </div>
           <p className="gmail-text">Or use your email account</p>
           <div className="input-field">
@@ -226,9 +202,9 @@ function LoginSignupForms() {
         >
           <h2 className="form-title">Create Account</h2>
           <div className="google-login">
-            <Link to="/auth/google" className="google-icon">
+            <button className="google-icon" onClick={googleLogin}>
               <i className="fab fa-google"></i> Login with Google
-            </Link>
+            </button>
           </div>
 
           <p className="gmail-text">Or use your email for registration</p>
@@ -300,11 +276,7 @@ function LoginSignupForms() {
             name="button"
             disabled={isFetching}
           >
-            {isFetching ? (
-              <CircularProgress color="#267b99" size="20px" />
-            ) : (
-              "Sign Up"
-            )}
+            {isFetching ? <CircularProgress size="20px" /> : "Sign Up"}
           </button>
         </form>
       </div>

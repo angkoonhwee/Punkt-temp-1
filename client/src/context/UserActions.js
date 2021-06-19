@@ -16,3 +16,7 @@ export const GoogleLogin = (user) => ({
   type: "GOOGLE_LOGIN",
   payload: user,
 });
+
+export const Logout = (user) => ({
+  type: "LOGOUT",
+});

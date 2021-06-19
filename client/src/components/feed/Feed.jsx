@@ -14,7 +14,11 @@ function Feed({ username }) {
       const res = username
         ? await axios.get("/post/profile/" + username)
         : await axios.get("/post/main/" + user._id);
-      setPosts(res.data);
+      setPosts(
+        res.data.sort(
+          (p1, p2) => new Date(p2.createdAt) - new Date(p1.createdAt)
+        )
+      );
     };
     fetchPosts();
   }, [username, user._id]);

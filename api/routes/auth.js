@@ -42,13 +42,19 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/punkt",
+      callbackURL: "http://localhost:8000/auth/google/punkt",
       // userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },
     function (accessToken, refreshToken, profile, cb) {
+      console.log(profile);
+      console.log(accessToken);
+
       User.findOrCreate(
         {
           googleId: profile.id,
+          email: profile.emails[0].value,
+          username: profile.name.familyName + profile.name.givenName,
+          profilePicture: profile.photos[0].value,
         },
         function (err, user) {
           return cb(err, user);
@@ -65,17 +71,42 @@ router.get(
   })
 );
 
-router.get(
-  "/google/punkt",
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-  }),
-  (req, res) => {
-    // Successful authentication, redirect home.
-    console.log("successful authentication with google");
-    res.redirect("/main");
+// router.get(
+//   "/google/punkt",
+//   passport.authenticate("google", {
+//     failureRedirect: "/login",
+//   }),
+//   (req, res) => {
+//     // Successful authentication, redirect home.
+//     console.log("successful authentication with google");
+//     res.status(200).json("successful authentication with google");
+//   }
+// );
+router.get("/google/punkt", passport.authenticate("google"), (req, res) => {
+  if (req.user) {
+    res.redirect(`http://localhost:3000/`);
+  } else {
+    res.redirect(`http://localhost:3000/login`);
   }
-);
+});
+
+// router.get("/login/success", (req, res) => {
+//   if (req.user) {
+//     res.redirect(`http://localhost:8000/`);
+//   } else res.redirect(`http://localhost:3000/login`);
+// });
+
+// router.get("/login/failed", (req, res) => {
+//   res.status(401).json({
+//     success: false,
+//     message: "user failed to authenticate.",
+//   });
+// });
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("http://localhost:3000");
+});
 
 // SIGN UP
 router.post("/signup", async (req, res) => {

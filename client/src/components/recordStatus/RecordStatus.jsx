@@ -32,7 +32,6 @@ export default function RecordStatus() {
       goalId: 123,
       img: [],
     };
-    console.log(files);
 
     if (files.length > 0) {
       const data = new FormData();
@@ -53,7 +52,6 @@ export default function RecordStatus() {
       // console.log(newPost);
       try {
         await axios.post("/upload", data);
-        window.location.reload();
       } catch (err) {
         console.log(err);
       }
@@ -61,6 +59,7 @@ export default function RecordStatus() {
 
     try {
       await axios.post("/post", newPost);
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }

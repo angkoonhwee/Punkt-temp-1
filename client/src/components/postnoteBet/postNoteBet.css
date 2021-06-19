@@ -1,7 +1,7 @@
 .post-note-bet {
   /* border-radius: 10px; */
   /* border: 2px solid #2d8091; */
-  padding: 5% 7.5%;
+  padding: 5% 10%;
   background-color: #add9e28a;
   -webkit-box-shadow: 5px 5px 16px -6px rgba(14, 30, 33, 0.74);
   box-shadow: 5px 5px 16px -6px rgba(14, 30, 33, 0.74);
@@ -160,21 +160,24 @@ input:focus {
 }
 
 @media (max-width: 770px) {
+  .post-note-bet {
+    padding: 5% 7.5%;
+  }
   .post-note-bet h3 {
     margin-bottom: 5px;
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 
   .post-note-bet p {
     line-height: 1.4;
     margin-bottom: 5px;
     color: #166e7e;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   #numDays {
     margin-bottom: 2.5px;
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .progressbar-text-wrapper p {

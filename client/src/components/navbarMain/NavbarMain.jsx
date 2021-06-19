@@ -8,14 +8,22 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import ExploreIcon from "@material-ui/icons/Explore";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import PublicIcon from "@material-ui/icons/Public";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
+import { logoutCall } from "../../apiCalls";
 
 function NavbarMain() {
   const PublicImg = process.env.PUBLIC_URL;
-  const { user } = useContext(UserContext);
-  console.log(user);
+  const { user, dispatch } = useContext(UserContext);
+  // console.log(user);
+
+  async function handleLogout() {
+    // logoutCall(dispatch);
+    // to be fixed
+    console.log("logout");
+  }
 
   return (
     <div className="container-fluid">
@@ -98,6 +106,13 @@ function NavbarMain() {
                   <p className="nav-name">Settings</p>
                 </div>
               </Link>
+            </li>
+
+            <li className="nav-item">
+              <div className="nav-link navbar-link-item" onClick={handleLogout}>
+                <ExitToAppIcon className="searchIcon navbar-icon" />
+                <p className="nav-name">Logout</p>
+              </div>
             </li>
 
             <li className="nav-item">

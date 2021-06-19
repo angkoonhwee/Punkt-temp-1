@@ -18,6 +18,12 @@ const userReducer = (state, action) => {
         isFetching: false,
         error: action.payload,
       };
+    case "LOGOUT":
+      return {
+        user: null,
+        isFetching: false,
+        error: false,
+      };
     case "GOOGLE_LOGIN":
       console.log(action.payload);
       break;

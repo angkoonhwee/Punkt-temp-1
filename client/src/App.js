@@ -1,3 +1,4 @@
+//jshint esversion:8
 import {
   BrowserRouter as Router,
   Switch,
@@ -23,8 +24,8 @@ function App() {
           {user ? <Redirect to="/main" /> : <Home />}
         </Route>
         <Route path="/login" exact>
-          {/* {user ? <Redirect to="/main" /> : <Login />} */}
-          <Login />
+          {user ? <Redirect to="/main" /> : <Login />}
+          {/* <Login /> */}
         </Route>
         <Route path="/signup" exact>
           {/* {user ? <Redirect to="/main" /> : <Signup />} */}

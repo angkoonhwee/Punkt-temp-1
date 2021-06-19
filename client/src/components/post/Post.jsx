@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./post.css";
 import ReportIcon from "@material-ui/icons/Report";
 import WhatshotIcon from "@material-ui/icons/Whatshot";
@@ -19,7 +19,7 @@ import { UserContext } from "../../context/UserContext";
 
 /* *********************************************************************** */
 
-export default function Post({ post, onDelete}) {
+export default function Post({ post, onDelete }) {
   const currDays = 10;
   const totalDays = 30;
 
@@ -52,11 +52,14 @@ export default function Post({ post, onDelete}) {
   const [numLit, setNumLit] = useState(post.lits.length);
   const [isCommenting, setIsCommenting] = useState(false);
   const [numComment, setNumComment] = useState(post.comments.length);
+  // const comm = useRef();
   const [comment, setComment] = useState("");
+  // const [amtBetFor, setAmtBetFor] = useState()
   const [isBetFor, setBetFor] = useState(false);
   const [isBetAgainst, setBetAgainst] = useState(false);
   const [user, setUser] = useState({});
   const { user: currUser } = useContext(UserContext);
+  const [allComments, setAllComments] = useState(post.comments);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -92,10 +95,23 @@ export default function Post({ post, onDelete}) {
     setBetAgainst(true);
   }
 
-  function submitComment(event) {
-    setNumComment(numComment + 1);
-    setComment("");
+  async function submitComment(event) {
     event.preventDefault();
+    try {
+      await axios.put("/post/" + post._id + "/comment", {
+        userId: currUser._id,
+        comment: comment,
+      });
+      const res = await axios.get("/post/" + post._id + "/comment");
+
+      // console.log(res.data);
+      setAllComments(res.data);
+      setNumComment(numComment + 1);
+    } catch (err) {
+      console.log(err);
+    }
+
+    setComment("");
   }
 
   function handleChange(event) {
@@ -271,7 +287,7 @@ export default function Post({ post, onDelete}) {
           <div className="post-comment">
             {isCommenting && (
               <div>
-                {post.comments.map((c, index) => (
+                {allComments.map((c, index) => (
                   <Comment key={index} comm={c} />
                 ))}
 
@@ -283,6 +299,7 @@ export default function Post({ post, onDelete}) {
                       className="comment-area"
                       placeholder="Write your comments"
                       onChange={handleChange}
+                      // ref={comm}
                     />
                     <button type="submit">Comment</button>
                   </div>

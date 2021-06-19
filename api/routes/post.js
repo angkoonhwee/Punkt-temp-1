@@ -15,7 +15,18 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const Post = require("../models/post");
 
-// GET POST
+// GET ALL POSTS
+router.get("/", async (req, res) => {
+  try {
+    const posts = await Post.find();
+    res.status(200).json(posts);
+  } catch (err) {
+    // json(err.message)
+    res.status(500).json(err);
+  }
+});
+
+// GET A POST BY ID
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -33,8 +44,19 @@ router.get("/profile/:username", async (req, res) => {
     const currUser = await User.findOne({ username: req.params.username });
     const userPosts = await Post.find({ userId: currUser._id });
 
-    // const allPosts = await Post.find();
     res.status(200).json(userPosts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET POSTS OF A GOAL
+router.get("/goal/:goalId", async (req, res) => {
+  try {
+    const currGoal = await Goal.findById(req.params.goalId);
+    const goalPosts = await Post.find({ goalId: currGoal._id });
+
+    res.status(200).json(goalPosts);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -120,6 +142,32 @@ router.put("/:id/like", async (req, res) => {
     }
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+// GET COMMENTS
+router.get("/:id/comment", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    res.status(200).json(post.comments);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// POST COMMENT
+router.put("/:id/comment", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    await post.updateOne({
+      $push: {
+        comments: { userId: req.body.userId, comment: req.body.comment },
+      },
+    });
+    res.status(200).json("post has been commented");
+  } catch (err) {
+    res.status(200).json(err);
   }
 });
 

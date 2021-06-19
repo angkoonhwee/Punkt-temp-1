@@ -6,21 +6,22 @@ const goalSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    goalId: {
-      type: String,
-      required: true,
-    },
     title: {
       type: String,
       max: 500,
+      required: true,
     },
     numDays: {
       type: Number,
-      default: 0,
+      required: true,
     },
     betAmount: {
       type: Number,
-      default: 0,
+      required: true,
+    },
+    postIds: {
+      type: Array,
+      default: [],
     },
     userBetFor: {
       type: Array,
@@ -29,6 +30,14 @@ const goalSchema = new mongoose.Schema(
     userBetAgainst: {
       type: Array,
       default: [],
+    },
+    amtBetFor: {
+      type: Number,
+      default: 0,
+    },
+    amtBetAgainst: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }
