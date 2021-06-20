@@ -137,6 +137,7 @@
   align-items: stretch;
   justify-content: space-between;
   width: 100%;
+  margin-top: 10px;
 }
 
 .comment-container textarea {
@@ -221,6 +222,10 @@
   align-items: center;
   line-height: 1.5;
   margin: 0 5px;
+}
+
+.post-user-comments .post-date {
+  padding-left: 7.5px;
 }
 
 @media (max-width: 950px) {
@@ -319,6 +324,7 @@
   .comment-container {
     font-size: 12.5px;
     line-height: 1.4;
+    margin-top: 5px;
   }
 
   .comment-container textarea {

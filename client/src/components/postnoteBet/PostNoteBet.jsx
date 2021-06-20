@@ -7,6 +7,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import { TextareaAutosize } from "@material-ui/core";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function PostNoteBet() {
   const { user } = useContext(UserContext);
@@ -23,7 +24,7 @@ export default function PostNoteBet() {
     if (user.goalId !== "") {
       const fetchGoal = async () => {
         const res = await axios.get("/goal/" + user.goalId);
-        console.log(res);
+        console.log(res.data.postIds);
         setCurrGoal(res.data);
       };
       fetchGoal();
@@ -36,7 +37,7 @@ export default function PostNoteBet() {
   //   (new Date(currGoal.createdAt) - new Date()) / _MS_PER_DAY
   // );
 
-  const currDays = currGoal.postIds.length;
+  const currDays = currGoal.postIds?.length;
 
   const totalDays = currGoal.numDays;
   const currProgress = Math.round((currDays / totalDays) * 100);
@@ -109,9 +110,11 @@ export default function PostNoteBet() {
                 {currDays + " / " + totalDays + " days"}
               </p>
             </div>
-            <Fab aria-label="edit" className="record-cirlce">
-              <EditIcon />
-            </Fab>
+            <Link to="/progress">
+              <Fab aria-label="edit" className="record-cirlce">
+                <EditIcon />
+              </Fab>
+            </Link>
           </div>
         </div>
       ) : (

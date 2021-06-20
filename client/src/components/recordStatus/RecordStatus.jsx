@@ -14,22 +14,55 @@ import { UserContext } from "../../context/UserContext";
 import axios from "axios";
 import ImgPreview from "./ImgPreview";
 
-export default function RecordStatus() {
+export default function RecordStatus({ goal }) {
   const { user } = useContext(UserContext);
   const desc = useRef("");
 
   const [files, setFiles] = useState([]);
+  const [isCompleted, setCompleted] = useState(
+    goal.postIds?.length === goal.numDays
+  );
   const [isDisabled, setDisabled] = useState(false);
   const [recordText, setRecordText] = useState("");
 
+  const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  function dateDiffInDays(a, b) {
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(
+      a.getFullYear(),
+      a.getMonth(),
+      a.getDate(),
+      a.getHours(),
+      a.getMinutes()
+    );
+
+    const utc2 = Date.UTC(
+      b.getFullYear(),
+      b.getMonth(),
+      b.getDate(),
+      b.getHours(),
+      b.getMinutes()
+    );
+
+    return Math.round((utc2 - utc1) / _MS_PER_DAY);
+  }
+
+  const dayDiff = dateDiffInDays(new Date(goal.createdAt), new Date());
+  // console.log(dayDiff);
+
+  useEffect(() => {
+    setCompleted(goal.postIds?.length === goal.numDays);
+    setDisabled(dayDiff < goal.postIds?.length);
+  }, [goal.postIds, goal.numDays, dayDiff]);
+
   async function submitRecord(event) {
-    // setDisabled(true);
     // setRecordText("");
     event.preventDefault();
     const newPost = {
       userId: user._id,
       desc: desc.current.value,
-      goalId: 123,
+      goalId: user.goalId,
       img: [],
     };
 
@@ -66,6 +99,8 @@ export default function RecordStatus() {
 
     // setRecordText("");
     // setFiles([]);
+    // setDisabled(true);
+    // setInterval(() => setDisabled(false), 5000);
   }
 
   function handleChange(event) {
@@ -93,8 +128,8 @@ export default function RecordStatus() {
     <div className="record-status">
       <form
         className="record-form"
-        disabled={isDisabled}
-        onSubmit={isDisabled ? false : submitRecord}
+        disabled={isDisabled || isCompleted}
+        onSubmit={isDisabled || isCompleted ? null : submitRecord}
       >
         <div className="record-container">
           <TextareaAutosize
@@ -103,18 +138,24 @@ export default function RecordStatus() {
             ref={desc}
             className="record-area"
             placeholder="Have you completed your goals today? (You can only record once a day, with a max of 6 imgs / record)"
-            disabled={isDisabled}
+            disabled={isDisabled || isCompleted}
             onChange={handleChange}
-            style={{ cursor: isDisabled ? "not-allowed" : "text" }}
+            style={{
+              cursor: isDisabled || isCompleted ? "not-allowed" : "text",
+            }}
           />
           <div className="record-bottom">
             <label
               htmlFor="file"
               className="shareOption"
-              style={{ cursor: isDisabled ? "not-allowed" : "pointer" }}
+              style={{
+                cursor: isDisabled || isCompleted ? "not-allowed" : "pointer",
+              }}
             >
               <PermMedia
-                htmlColor={isDisabled ? "grey" : "rgb(255 101 132)"}
+                htmlColor={
+                  isDisabled || isCompleted ? "grey" : "rgb(255 101 132)"
+                }
                 className="shareIcon"
               />
               <span className="shareOptionText">Image</span>
@@ -125,17 +166,18 @@ export default function RecordStatus() {
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
-                disabled={isDisabled}
+                disabled={isDisabled || isCompleted}
                 multiple
                 onChange={handleUpload}
               />
             </label>
             <button
               type="submit"
-              disabled={isDisabled}
+              disabled={isDisabled || isCompleted}
               style={{
-                cursor: isDisabled ? "not-allowed" : "pointer",
-                backgroundColor: isDisabled ? "grey" : "rgb(247, 176, 25)",
+                cursor: isDisabled || isCompleted ? "not-allowed" : "pointer",
+                backgroundColor:
+                  isDisabled || isCompleted ? "grey" : "rgb(247, 176, 25)",
               }}
             >
               Record

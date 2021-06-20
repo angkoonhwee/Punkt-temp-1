@@ -23,7 +23,13 @@ const postSchema = new mongoose.Schema(
       default: [],
     },
     comments: {
-      type: [{ userId: String, comment: String }],
+      type: [
+        {
+          userId: String,
+          comment: String,
+          createdAt: Date,
+        },
+      ],
       default: [],
     },
   },

@@ -13,23 +13,44 @@ import { UserContext } from "../../context/UserContext";
 
 export default function Progress() {
   const PF = process.env.REACT_APP_PUBLIC_URL;
-  const { user } = useContext(UserContext);
+  const { user: currUser } = useContext(UserContext);
   const username = useParams().username;
-  // const [user, setUser] = useState({});
-  // const username = useParams().username;
+  const [goal, setGoal] = useState({});
+  const [user, setUser] = useState({}); // owner of the goal
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = username
+        ? await axios.get(`/user?username=${username}`)
+        : await axios.get("/");
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [username]);
+
+  useEffect(() => {
+    const fetchGoal = async () => {
+      const res = username
+        ? await axios.get("/goal/profile/" + username)
+        : await axios.get("/goal/" + currUser.goalId);
+
+      setGoal(res.data);
+    };
+    fetchGoal();
+  }, [currUser.goalId, username]);
 
   return (
     <div>
       <NavbarMain />
       <div className="container-progress">
-        <BetStatus user={user} />
-        {!username || username === user.username ? (
-          <RecordStatus />
+        <BetStatus user={username ? user : currUser} goal={goal} />
+        {!username || username === currUser.username ? (
+          <RecordStatus goal={goal} />
         ) : (
-          <SetBet />
+          <SetBet user={user} goal={goal} />
         )}
 
-        <ProgressTimeline username={user.username} />
+        <ProgressTimeline user={username ? user : currUser} goal={goal} />
       </div>
       <ScrollTop />
       <Footer />

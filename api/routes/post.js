@@ -14,6 +14,7 @@ const async = require("async");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const Post = require("../models/post");
+const Goal = require("../models/goal");
 
 // GET ALL POSTS
 router.get("/", async (req, res) => {
@@ -86,6 +87,9 @@ router.post("/", async (req, res) => {
 
   try {
     const savedPost = await newPost.save();
+    const currGoal = Goal.findById(req.body.goalId);
+    await currGoal.updateOne({ $push: { postIds: savedPost.id } });
+
     res.status(200).json(savedPost);
   } catch (err) {
     res.status(500).json(err);
@@ -114,11 +118,13 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    const currGoal = await Goal.findById(post.goalId);
 
     if (!post) {
       res.status(404).json("The post you are requesting does not exist.");
-    } else if (post.userId !== req.body.userId) {
+    } else if (post.userId === req.body._id) {
       await post.deleteOne();
+      await currGoal.updateOne({ $pull: { postIds: req.params.id } });
       res.status(200).json("Post has been deleted.");
     } else {
       res.status(403).json("You can delete only your post");
@@ -162,7 +168,11 @@ router.put("/:id/comment", async (req, res) => {
     const post = await Post.findById(req.params.id);
     await post.updateOne({
       $push: {
-        comments: { userId: req.body.userId, comment: req.body.comment },
+        comments: {
+          userId: req.body.userId,
+          comment: req.body.comment,
+          createdAt: req.body.createdAt,
+        },
       },
     });
     res.status(200).json("post has been commented");

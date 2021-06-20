@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 import UserReducer from "./UserReducer";
 
 const INITIAL_STATE = {
-  user: {
+  /*user: {
     _id: "60c714754542590e58572c50",
     profilePicture: "",
     coverPicture: "",
@@ -26,8 +26,8 @@ const INITIAL_STATE = {
     createdAt: new Date(2021, 5, 14),
     updatedAt: new Date(2021, 5, 14),
     __v: 0,
-  },
-  // user: JSON.parse(localStorage.getItem("user")) || null,
+  },*/
+  user: JSON.parse(localStorage.getItem("user")) || null,
   isFetching: false,
   error: false,
 };

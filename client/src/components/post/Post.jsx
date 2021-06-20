@@ -19,34 +19,7 @@ import { UserContext } from "../../context/UserContext";
 
 /* *********************************************************************** */
 
-export default function Post({ post, onDelete }) {
-  const currDays = 10;
-  const totalDays = 30;
-
-  // const months = {
-  //   0: "January",
-  //   1: "February",
-  //   2: "March",
-  //   3: "April",
-  //   4: "May",
-  //   5: "June",
-  //   6: "July",
-  //   7: "August",
-  //   8: "September",
-  //   9: "October",
-  //   10: "November",
-  //   11: "December",
-  // };
-  // const date = new Date();
-  // const day = date.getDay();
-  // const mth = months[date.getMonth()];
-  // const yr = date.getFullYear();
-  // const hr = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-  // const min =
-  //   date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-  // // const time = moment(date.toLocaleTimeString(), "hh:mm A").format("HH:mm");
-
-  // const formattedDate = date.toLocaleTimeString() + `,  ${day} ${mth} ${yr}`;
+export default function Post({ post }) {
   const PublicImg = process.env.REACT_APP_PUBLIC_URL;
   const [isLit, setIsLit] = useState(false);
   const [numLit, setNumLit] = useState(post.lits.length);
@@ -60,6 +33,7 @@ export default function Post({ post, onDelete }) {
   const [user, setUser] = useState({});
   const { user: currUser } = useContext(UserContext);
   const [allComments, setAllComments] = useState(post.comments);
+  const [goal, setGoal] = useState({});
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -72,6 +46,17 @@ export default function Post({ post, onDelete }) {
   useEffect(() => {
     setIsLit(post.lits.includes(currUser._id));
   }, [currUser._id, post.lits]);
+
+  useEffect(() => {
+    const fetchGoal = async () => {
+      const res = user.goalId && (await axios.get("/goal/" + user.goalId));
+      user.goalId && setGoal(res.data);
+    };
+    fetchGoal();
+  }, [user.goalId]);
+
+  const currDays = goal.postIds?.length;
+  const totalDays = goal.numDays;
 
   function handleLit() {
     try {
@@ -101,6 +86,7 @@ export default function Post({ post, onDelete }) {
       await axios.put("/post/" + post._id + "/comment", {
         userId: currUser._id,
         comment: comment,
+        createdAt: new Date(),
       });
       const res = await axios.get("/post/" + post._id + "/comment");
 
@@ -117,6 +103,15 @@ export default function Post({ post, onDelete }) {
   function handleChange(event) {
     const { name, value } = event.target;
     setComment(value);
+  }
+
+  async function deletePost(postId) {
+    try {
+      await axios.delete("/post/" + postId, { data: currUser });
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // function handleKeyPress(event) {
@@ -157,7 +152,7 @@ export default function Post({ post, onDelete }) {
           <div className="post-top-right">
             {currUser._id === post.userId ? (
               <DeleteIcon
-                onClick={() => onDelete(post._id)}
+                onClick={() => deletePost(post._id)}
                 style={{ cursor: "pointer", color: "#16697a" }}
               />
             ) : (
@@ -208,28 +203,33 @@ export default function Post({ post, onDelete }) {
             </button>
           </div>
         </div>
-
-        <div className="post-goal-section">
-          <div className="post-goal-content">
-            <div className="goal-bet-amount">
-              <p>
-                <strong>SGD: </strong>5.00
-              </p>
+        <Link
+          to={"/progress/" + user.username}
+          style={{ textDecoration: "none" }}
+        >
+          <div className="post-goal-section">
+            <div className="post-goal-content">
+              <div className="goal-bet-amount">
+                <p>
+                  <strong>SGD: </strong>
+                  {goal.betAmount}
+                </p>
+              </div>
+              <div className="goal-title">
+                <p>
+                  <strong>Goal: </strong>
+                  {goal.title}
+                </p>
+              </div>
             </div>
-            <div className="goal-title">
+            <div className="goal-progress">
               <p>
-                <strong>Goal: </strong>Study for 6 hours a day
+                <strong>Progress: </strong>
+                {currDays + " / " + totalDays}
               </p>
             </div>
           </div>
-          <div className="goal-progress">
-            <p>
-              <strong>Progress: </strong>
-              {currDays + " / " + totalDays}
-            </p>
-          </div>
-        </div>
-
+        </Link>
         <div className="post-bottom">
           <div className="post-bottom-left">
             <div className="post-bottom-left-btn">
@@ -267,7 +267,7 @@ export default function Post({ post, onDelete }) {
               >
                 <i class="far fa-laugh-wink"></i>
               </Fab>
-              <p className="post-lit-counter">${numLit}</p>
+              <p className="post-lit-counter">${goal.amtBetFor}</p>
             </div>
 
             <div className="post-bottom-left-btn">
@@ -279,9 +279,9 @@ export default function Post({ post, onDelete }) {
                     : "#95c9d4b0",
                 }}
               >
-                <i class="far fa-meh"></i>
+                <i className="far fa-meh" />
               </Fab>
-              <p className="post-lit-counter">${numComment}</p>
+              <p className="post-lit-counter">${goal.amtBetAgainst}</p>
             </div>
           </div>
           <div className="post-comment">

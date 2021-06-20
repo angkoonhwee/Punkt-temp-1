@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
 import ForgotPassword from "./pages/forgotPassword/ForgotPassword";
 import ResetPassword from "./pages/resetPassword/ResetPassword";
+import ExplorePage from "./pages/explore/ExplorePage";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route path="/main" exact>
           <Main />
+        </Route>
+        <Route path="/explore">
+          <ExplorePage />
         </Route>
         <Route path="/profile/:username">
           <Main />

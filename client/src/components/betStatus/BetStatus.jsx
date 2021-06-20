@@ -9,22 +9,63 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import "./betStatus.css";
 
-export default function BetStatus({ user }) {
-  const currDays = 10;
-  const totalDays = 30;
-  const currProgress = Math.round((currDays / totalDays) * 100);
+export default function BetStatus({ user, goal }) {
   const PublicImg = process.env.REACT_APP_PUBLIC_URL;
+  const [latestPost, setLatestPost] = useState({});
 
-  const [posts, setPosts] = useState([]);
+  const currDays = goal.postIds?.length;
+  const totalDays = goal.numDays;
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await axios.get("/post/profile/" + user.username);
-
-      setPosts(res.data);
+    const fetchLatestPost = async () => {
+      if (goal.postIds && goal.postIds.length > 0) {
+        const res = await axios.get(
+          `/post/${goal.postIds[goal.postIds.length - 1]}`
+        );
+        setLatestPost(res.data);
+      }
     };
-    fetchPosts();
-  }, [user.username]);
+    fetchLatestPost();
+  }, [goal.postIds]);
+
+  const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  function dateDiffInDays(a, b) {
+    // Discard the time and time-zone information.
+    const utc1 = Date.UTC(
+      a.getFullYear(),
+      a.getMonth(),
+      a.getDate(),
+      a.getHours(),
+      a.getMinutes()
+    );
+
+    const utc2 = Date.UTC(
+      b.getFullYear(),
+      b.getMonth(),
+      b.getDate(),
+      b.getHours(),
+      b.getMinutes()
+    );
+
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+  }
+
+  function checkProgress() {
+    const startDate = new Date(goal.createdAt);
+    const currDate = latestPost.createdAt
+      ? new Date(latestPost.createdAt)
+      : new Date();
+    // console.log(currDate);
+
+    if (dateDiffInDays(startDate, currDate) > 1) {
+      return "Failed";
+    } else if (currDays < totalDays) {
+      return "In Progress";
+    } else {
+      return "Success";
+    }
+  }
 
   return (
     <div className="bet-status">
@@ -41,14 +82,14 @@ export default function BetStatus({ user }) {
           ></img>
           <p className="post-name">{user.username}</p>
         </div>
-        <h2>「 Study for 6h a day 」</h2>
+        <h2>「 {goal.title} 」</h2>
       </div>
       <div className="status-middle">
         <div className="middle-component">
           <h4>
             <strong>Amount:</strong>
           </h4>
-          <h4>SGD 5.00</h4>
+          <h4>SGD {goal.betAmount}</h4>
         </div>
 
         <div className="middle-component">
@@ -62,7 +103,7 @@ export default function BetStatus({ user }) {
           <h4>
             <strong>Status:</strong>
           </h4>
-          <h4>In Progress</h4>
+          <h4>{checkProgress()}</h4>
         </div>
       </div>
     </div>

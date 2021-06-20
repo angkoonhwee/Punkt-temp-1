@@ -52,7 +52,7 @@ function NavbarMain() {
             </li>
 
             <li className="nav-item">
-              <Link style={{ textDecoration: "none" }} to="/main">
+              <Link style={{ textDecoration: "none" }} to="/explore">
                 <div className="nav-link navbar-link-item">
                   <ExploreIcon className="searchIcon navbar-icon" />
                   {/* <span className="navbar-icon-badge"></span> */}

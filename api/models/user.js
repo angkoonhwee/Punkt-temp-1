@@ -70,11 +70,11 @@ const userSchema = new mongoose.Schema(
       default: 0,
     },
     betFor: {
-      type: Array,
+      type: [{ goalId: String, amt: Number }],
       default: [],
     },
     betAgainst: {
-      type: Array,
+      type: [{ goalId: String, amt: Number }],
       default: [],
     },
     buddyHistory: {
